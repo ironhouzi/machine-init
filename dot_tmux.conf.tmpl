@@ -1,0 +1,44 @@
+unbind C-b
+set-option -g prefix C-space
+bind-key C-space send-prefix
+
+# mouse scroll
+set -g mouse on
+
+# # avoid bell so mac dock doesn't pop off constantly
+# set -g visual-bell on
+
+# Start windows and panes at 1, not 0
+set -g base-index 1
+setw -g pane-base-index 1
+
+# recommended by neovim :checkhealth
+set-option -sg escape-time 10
+set-option -g focus-events on
+# true color support not supported in terminal.app :(
+set -g default-terminal "screen-256color"
+# tell outside terminal, tmux supports true color
+set-option -sa terminal-features ',xterm-256color:RGB'
+
+# vi search
+set-window-option -g mode-keys vi
+
+# vi copy
+unbind-key -T copy-mode-vi v
+setw -g mode-keys vi
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi 'C-v' send -X rectangle-toggle
+
+{{ if eq .chezmoi.os "darwin" -}}
+bind-key -T copy-mode-vi 'y' send -X copy-selection
+set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'
+{{ else if eq .chezmoi.os "linux" -}}
+set -s copy-command 'wl-copy'
+bind P paste-buffer
+# set-option -g set clipboard off
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'wl-copy'
+{{- end }}
+
+# scrollback buffer
+set -g history-limit 50000
