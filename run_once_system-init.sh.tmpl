@@ -1,0 +1,8 @@
+#!/bin/sh
+
+{{ if eq .chezmoi.osRelease.name "Fedora Linux" -}}
+sudo dnf install --assumeyes copr-cli
+{{ end -}}
+
+sudo mkdir -p /etc/keyd
+sudo cp {{ .chezmoi.sourceDir }}/.system-files/keyd.conf /etc/keyd/default.conf

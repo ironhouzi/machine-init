@@ -1,0 +1,9 @@
+{{ if eq .chezmoi.osRelease.name "Fedora Linux" -}}
+#!/bin/sh
+sudo systemctl enable keyd
+sudo systemctl start keyd
+
+# TODO: setup syncthing
+
+{{ end -}}
+

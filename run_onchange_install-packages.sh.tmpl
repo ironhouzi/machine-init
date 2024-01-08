@@ -1,0 +1,23 @@
+{{ if eq .chezmoi.osRelease.name "Fedora Linux" -}}
+#!/bin/sh
+sudo dnf install --assumeyes \
+    bat \
+    gstreamer1-plugins-{bad-\*,good-\*,base} \
+    gstreamer1-plugin-openh264 \
+    gstreamer1-plugin-libav \
+    lame\* \
+    eza \
+    fd-find \
+    fish \
+    fzf \
+    jq \
+    keyd \
+    ripgrep \
+    syncthing \
+    --exclude=gstreamer1-plugins-bad-free-devel \
+    --exclude=lame-devel
+
+
+flatpak install --assumeyes flathub md.obsidian.Obsidian
+sudo dnf group upgrade --assumeyes --with-optional Multimedia
+{{ end -}}
