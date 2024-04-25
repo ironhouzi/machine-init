@@ -1,0 +1,4 @@
+#!/bin/sh
+{{ if not (stat (joinPath .chezmoi.homeDir ".config" "nvim" "init.lua")) -}}
+git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+{{ end -}}
