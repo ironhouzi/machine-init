@@ -27,6 +27,20 @@ sudo dnf group upgrade --assumeyes --with-optional Multimedia
 {{- else if contains "debian" .chezmoi.osRelease.idLike -}}
 #!/bin/sh
 
+sudo apt-get update
+sudo apt-get install -y \
+    bat \
+    clang \
+    eza \
+    fd-find \
+    fish \
+    fzf \
+    jq \
+    make \
+    syncthing \
+    tmux \
+    vim
+
 # # move to script
 # cd /tmp
 # git clone https://github.com/rvaiya/keyd
@@ -34,17 +48,6 @@ sudo dnf group upgrade --assumeyes --with-optional Multimedia
 # make && sudo make install
 
 # sudo systemctl enable keyd && sudo systemctl start keyd
-
-sudo apt-get update
-sudo apt-get install -y \
-    bat \
-    exa \
-    fd-find \
-    fish \
-    fzf \
-    jq \
-    syncthing \
-    tmux \
-    vim
+# sudo systemctl enable syncthing@$USER.service && sudo systemctl start syncthing@$USER.service
 
 {{ end -}}
