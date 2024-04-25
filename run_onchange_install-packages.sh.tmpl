@@ -23,4 +23,28 @@ sudo dnf install --assumeyes \
 
 flatpak install --assumeyes flathub md.obsidian.Obsidian
 sudo dnf group upgrade --assumeyes --with-optional Multimedia
+
+{{- else if contains "debian" .chezmoi.osRelease.idLike -}}
+#!/bin/sh
+
+# # move to script
+# cd /tmp
+# git clone https://github.com/rvaiya/keyd
+# cd keyd
+# make && sudo make install
+
+# sudo systemctl enable keyd && sudo systemctl start keyd
+
+sudo apt-get update
+sudo apt-get install -y \
+    bat \
+    exa \
+    fd-find \
+    fish \
+    fzf \
+    jq \
+    syncthing \
+    tmux \
+    vim
+
 {{ end -}}
