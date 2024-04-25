@@ -28,6 +28,7 @@ sudo dnf group upgrade --assumeyes --with-optional Multimedia
 #!/bin/sh
 
 sudo apt-get update
+sudo apt-get remove nano
 sudo apt-get install -y \
     bat \
     clang \
@@ -37,6 +38,7 @@ sudo apt-get install -y \
     fzf \
     jq \
     make \
+    neovim \
     syncthing \
     tmux \
     vim
